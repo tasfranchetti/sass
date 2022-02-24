@@ -3,25 +3,53 @@
 
 //import siempre primero y respetando cascada
 
-@import "bootstrap/bootstrap.scss";
+//@import "bootstrap/bootstrap.scss"; // esto hace pesado el CSS, no es recomendable
 
-$marca: rgb(145, 161, 74);
+//Mapas
 
-//Nesting
+$media: (
+    twitter: #55acee,
+    facebook: #3a5795,
+    instagram: rgb(155, 0, 72),
+);
 
-ul {
-    list-style: none;
-    li {
-        padding: 15px;
-        display: inline-block;
-        //implementando pseudo clases y pseudoelementos
-        &:active {
-            border: solid red;
-        }            
-
-        a {
-            text-decoration: none;
-            font-size: 16px;
-        }
+@each $red, $color in $media {     
+    .btn--#{$red}{
+        background-color: $color;
     }
+}
+
+//Extend
+.cardproducto {
+    width: 400px;
+    height: 460px;
+    border-radius: 80px;
+    border-color: rgb(102, 102, 102);
+    background-color:rgb(194, 194, 194);
+}
+
+.cardproductoactivo {
+    @extend .cardproducto;
+    width: 450px;
+    height: 510px;
+
+}
+
+//Mixin
+@mixin cardsprd ($width, $height) {
+    height: $height;
+    width: $width;
+}
+
+.producto1 {
+    @include cardsprd(400px, 460px)
+}
+.producto2 {
+    @include cardsprd(420px, 480px)
+}
+.producto3 {
+    @include cardsprd(300px, 360px)
+}
+.producto4 {
+    @include cardsprd(200px, 260px)
 }
